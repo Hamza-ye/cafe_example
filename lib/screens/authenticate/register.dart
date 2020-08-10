@@ -1,13 +1,11 @@
-import 'package:cofe_example_firebase/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-  final AuthService _authService = AuthService();
+class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
 
@@ -17,7 +15,7 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
-        title: Text('Sign in'),
+        title: Text('Register'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -40,7 +38,7 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink[500],
                 child: Text(
-                  'Sign in',
+                  'Register',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
