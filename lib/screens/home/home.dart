@@ -1,10 +1,12 @@
 import 'package:cofe_example_firebase/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   final _authService = AuthService();
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
@@ -16,7 +18,7 @@ class Home extends StatelessWidget {
             icon: Icon(Icons.person),
             label: Text('Logout'),
             onPressed: () async {
-              await _authService.signOut();
+              await authService.signOut();
             },
           ),
         ],

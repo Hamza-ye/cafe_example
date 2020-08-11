@@ -2,6 +2,7 @@ import 'package:cofe_example_firebase/services/auth.dart';
 import 'package:cofe_example_firebase/shared/constants.dart';
 import 'package:cofe_example_firebase/shared/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -13,8 +14,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final AuthService _authService = AuthService();
-
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -24,6 +23,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return loading
         ? Loading()
         : Scaffold(
@@ -78,7 +78,7 @@ class _RegisterState extends State<Register> {
                         });
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
-                          dynamic result = await _authService
+                          dynamic result = await authService
                               .registerWithEmailAndPassword(email, password);
                           if (result is String)
                             setState(() {
