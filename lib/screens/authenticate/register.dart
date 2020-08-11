@@ -1,4 +1,5 @@
 import 'package:cofe_example_firebase/services/auth.dart';
+import 'package:cofe_example_firebase/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -44,6 +45,7 @@ class _RegisterState extends State<Register> {
                 height: 20.0,
               ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(labelText: 'Email'),
                 validator: (value) =>
                     value.isEmpty ? 'Must be filled out' : null,
                 onChanged: (value) => setState(() => email = value),
@@ -52,8 +54,9 @@ class _RegisterState extends State<Register> {
                 height: 20.0,
               ),
               TextFormField(
+                decoration: textInputDecoration.copyWith(labelText: 'Password'),
                 validator: (value) =>
-                    value.length < 6 ? 'Must be 6 charecters or more' : null,
+                    value.length < 6 ? 'Must be 6+ chars long' : null,
                 obscureText: true,
                 onChanged: (value) => setState(() => password = value),
               ),
