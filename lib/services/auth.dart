@@ -1,4 +1,5 @@
 import 'package:cofe_example_firebase/models/user.dart';
+import 'package:cofe_example_firebase/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
@@ -44,6 +45,8 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      await DatabaseService(uid: result.user.uid)
+          .updateUserData('0', 'new brews member', 100);
       return _userFromFirebaseUser(result.user);
     } on PlatformException catch (err) {
       return err.message;
