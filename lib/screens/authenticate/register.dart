@@ -49,6 +49,7 @@ class _RegisterState extends State<Register> {
                       height: 20.0,
                     ),
                     TextFormField(
+                      enabled: !loading,
                       decoration:
                           textInputDecoration.copyWith(labelText: 'Email'),
                       validator: (value) =>
@@ -59,6 +60,7 @@ class _RegisterState extends State<Register> {
                       height: 20.0,
                     ),
                     TextFormField(
+                      enabled: !loading,
                       decoration:
                           textInputDecoration.copyWith(labelText: 'Password'),
                       validator: (value) =>
@@ -72,21 +74,24 @@ class _RegisterState extends State<Register> {
                         'Register',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () async {
-                        setState(() {
-                          error = '';
-                        });
-                        if (_formKey.currentState.validate()) {
-                          setState(() => loading = true);
-                          dynamic result = await authService
-                              .registerWithEmailAndPassword(email, password);
-                          if (result is String)
-                            setState(() {
-                              loading = false;
-                              error = result;
-                            });
-                        }
-                      },
+                      onPressed: loading
+                          ? null
+                          : () async {
+                              setState(() {
+                                error = '';
+                              });
+                              if (_formKey.currentState.validate()) {
+                                setState(() => loading = true);
+                                dynamic result = await authService
+                                    .registerWithEmailAndPassword(
+                                        email, password);
+                                if (result is String)
+                                  setState(() {
+                                    loading = false;
+                                    error = result;
+                                  });
+                              }
+                            },
                     ),
                     SizedBox(
                       height: 20.0,
