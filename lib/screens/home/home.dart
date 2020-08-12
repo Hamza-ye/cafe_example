@@ -6,7 +6,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    return Scaffold(
+    return Provider<DatabaseService>(
+      create: (_) => DatabaseService(),
+      child: Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -22,7 +24,8 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: Text('Home'),
+        body: BrewList(),
+      ),
     );
   }
 }
