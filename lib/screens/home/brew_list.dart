@@ -1,5 +1,6 @@
 import 'package:cofe_example_firebase/models/brew.dart';
 import 'package:cofe_example_firebase/services/database.dart';
+import 'package:cofe_example_firebase/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _BrewListState extends State<BrewList> {
           );
         }
         return Center(
-          child: CircularProgressIndicator(),
+          child: Loading(),
         );
       },
     );

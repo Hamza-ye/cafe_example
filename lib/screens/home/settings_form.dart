@@ -2,6 +2,7 @@ import 'package:cofe_example_firebase/models/user.dart';
 import 'package:cofe_example_firebase/services/auth.dart';
 import 'package:cofe_example_firebase/services/database.dart';
 import 'package:cofe_example_firebase/shared/constants.dart';
+import 'package:cofe_example_firebase/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -94,9 +95,7 @@ class _SettingsFormState extends State<SettingsForm> {
               ),
             );
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
           // _setUserData(snapshot.data);
 
