@@ -14,15 +14,19 @@ class _BrewListState extends State<BrewList> {
     final databaseService = Provider.of<DatabaseService>(context);
 
     return StreamBuilder(
-      initialData: List<Brew>(),
       stream: databaseService.brews,
       builder: (context, snapshot) {
-        final List<Brew> brews = snapshot.data;
-        return ListView.builder(
-          itemCount: brews.length,
-          itemBuilder: (context, index) {
-            return BrewTile(brew: brews[index]);
-          },
+        if (snapshot.connectionState == ConnectionState.active) {
+          final List<Brew> brews = snapshot.data;
+          return ListView.builder(
+            itemCount: brews.length,
+            itemBuilder: (context, index) {
+              return BrewTile(brew: brews[index]);
+            },
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(),
         );
       },
     );
