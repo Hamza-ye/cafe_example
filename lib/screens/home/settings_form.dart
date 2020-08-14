@@ -85,10 +85,14 @@ class _SettingsFormState extends State<SettingsForm> {
                       'Update',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-                      print(_currentName ?? userData.name);
-                      print(_currentSugars ?? userData.sugars);
-                      print(_currentStrength ?? userData.strength);
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        await databaseService.updateUserData(
+                            _currentSugars ?? userData.sugars,
+                            _currentName ?? userData.name,
+                            _currentStrength ?? userData.strength);
+                      }
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -97,11 +101,6 @@ class _SettingsFormState extends State<SettingsForm> {
           } else {
             return Loading();
           }
-          // _setUserData(snapshot.data);
-
-          // return Center(
-          //   child: CircularProgressIndicator(),
-          // );
         });
   }
 }
