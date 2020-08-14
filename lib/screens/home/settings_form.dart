@@ -17,6 +17,7 @@ class _SettingsFormState extends State<SettingsForm> {
   String _currentSugars;
   String _currentName;
   int _currentStrength;
+  bool _updating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     height: 20.0,
                   ),
                   TextFormField(
+                    enabled: !_updating,
                     decoration: textInputDecoration.copyWith(labelText: 'Name'),
                     initialValue: _currentName ?? userData?.name,
                     validator: (value) =>
@@ -84,16 +86,28 @@ class _SettingsFormState extends State<SettingsForm> {
                       'Update',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        await databaseService.updateUserData(
-                            _currentSugars ?? userData.sugars,
-                            _currentName ?? userData.name,
-                            _currentStrength ?? userData.strength);
-                      }
-                      Navigator.pop(context);
-                    },
+                    onPressed: _updating
+                        ? null
+                        : () async {
+                            if (_formKey.currentState.validate()) {
+                              setState(() {
+                                _updating = true;
+                              });
+                              await databaseService.updateUserData(
+                                  _currentSugars ?? userData.sugars,
+                                  _currentName ?? userData.name,
+                                  _currentStrength ?? userData.strength);
+                              setState(() {
+                                _updating = true;
+                              });
+                              Navigator.pop(context);
+                            }
+                          },
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  if (_updating) Loading(),
                 ],
               ),
             );
