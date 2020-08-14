@@ -1,5 +1,4 @@
 import 'package:cofe_example_firebase/models/user.dart';
-import 'package:cofe_example_firebase/services/auth.dart';
 import 'package:cofe_example_firebase/services/database.dart';
 import 'package:cofe_example_firebase/shared/constants.dart';
 import 'package:cofe_example_firebase/shared/loading.dart';
